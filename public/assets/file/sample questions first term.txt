@@ -1,0 +1,32 @@
+Short Questions:
+
+1.	Describe about cloud-based services. What are the challenges in cloud computing?
+2.	What are the cloud security challenges? How can risks be handled in cloud computing?
+3.	Discuss the features that make cloud computing better than traditional on-premise computing?
+4.	How does properties like elasticity and scalability influence cloud computing?
+5.	In what scenario hybrid cloud model is better deployed? How it can be used in cloud?
+6.	Discuss various services provided under infrastructure-as-a-Service (IaaS)?
+7.	How does load balancer work in cloud architecture?
+8.	What are the areas in which cloud computing is used?
+9.	What is the need for adapting hybrid cloud deployment model? How this model differs from public and private deployment modes?
+10.	Mention the characteristics of Software-as-a-service (SaaS). What implementation issues should be considered in SaaS?
+11.	What computing services are provided under PaaS? 
+12.	What is the use of grid computing? How computing in grid architecture differs from cloud architecture? Explain.
+13.	What is para-virtualization? How virtualization is used to enforce cloud computing services?
+14.	Define cloud migration? What are the reasons for the companies to migrate from traditional computing environment to cloud computing environments?
+15.	What is the need for data center virtualization? What are the benefits of data center virtualization?
+16.	How does virtualization help in cloud computing?
+17.	Write short notes on:
+a)	Hypervisors
+b)	Load balancing in Cloud Computing
+c.	Data Center
+d.	Disaster Recovery
+
+
+Long Questions:
+1.	What do you mean by virtualization? What is the role of virtualization in cloud computing? Differentiate between type 1 hypervisor and type 2 hypervisor.
+2.	What do you mean by service-oriented architecture (SOA)? How can you characterize SOA? What is the relation between SOA and cloud Architecture.
+3.	Differentiate platform as a service, infrastructure as a service and software as a service with each other with scenarios and examples.
+4	What do you mean by service-oriented architecture (SOA)? Why it is defined as black-box and loosely coupled architecture? How are SOA and cloud Architecture interrelated.
+5.	How the term cloud has been instantiated in cloud computing? Discuss the benefits of adapting cloud computing environments. List few cloud security issues and threats in cloud computing?
+6.	What are differences between para-virtualization and Full Virtualization? How virtualization is used to enforce cloud computing services?
