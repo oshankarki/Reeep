@@ -38,8 +38,10 @@
                     </button>
                 </div>
             </div>
-            {!!Form::open(['route' => [$base_route.'store'],'method'=>'post'])!!}
+            {!!Form::open(['route' => [$base_route.'store'],'method'=>'post','enctype'=>"multipart/form-data"])!!}
+            <div class="card-body">
             @include($base_view .'main_form',['button'=>'Save'])
+            </div>
             {{Form::close()}}
 
             <!-- /.card-body -->
@@ -54,5 +56,19 @@
     <!-- /.content -->
 @endsection
 @section('js')
-
+<script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').attr('src', e.target.result);
+                $('#imagePreviewContainer').show();
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            $('#imagePreview').attr('src', '#');
+            $('#imagePreviewContainer').hide();
+        }
+    }
+</script>
 @endsection

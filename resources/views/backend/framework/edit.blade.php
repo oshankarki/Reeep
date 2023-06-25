@@ -26,9 +26,7 @@
             <div class="card-header">
                 <h3 class="card-title"> {{$module}}
                     <a href="{{route($base_route.'index')}}" class="btn btn-info">List</a>
-
                 </h3>
-
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -38,9 +36,18 @@
                     </button>
                 </div>
             </div>
-            {!!Form::open(['route' => [$base_route.'store'],'method'=>'post'])!!}
-            @include($base_view .'main_form',['button'=>'Save'])
-            {{Form::close()}}
+            {!! Form::model($framework['record'], ['route' => [$base_route . 'update', $framework['record']], 'method' => 'post','enctype'=>"multipart/form-data"]) !!}
+            @method('PUT')
+            <div class="card-body">
+                Previous Image:
+                @if($framework['record'])
+                    <img src="{{ asset('storage/images/'.$framework['record']->image) }}" alt="Banner Image" height="200px" width="200">
+                @endif
+                    @include($base_view . 'main_form', ['button' => 'Update'])
+
+            </div>
+
+            {{ Form::close() }}
 
             <!-- /.card-body -->
             <div class="card-footer">
@@ -54,5 +61,19 @@
     <!-- /.content -->
 @endsection
 @section('js')
-
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                    $('#imagePreviewContainer').show();
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                $('#imagePreview').attr('src', '#');
+                $('#imagePreviewContainer').hide();
+            }
+        }
+    </script>
 @endsection

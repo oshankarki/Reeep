@@ -84,7 +84,6 @@ class MenuController extends BackendBaseController
     public function edit($id)
     {
         $menu['record'] = $this->model::find($id);
-        $parentMenu = $this->model::find($menu['record']->parent_id);
         $menuItems = $this->model::with('children')->whereNull("parent_id")->get();
         return view($this->__loadDataToView($this->base_view .'edit'),compact('menu','menuItems'));
     }
@@ -131,8 +130,17 @@ class MenuController extends BackendBaseController
     public function destroy(string $id)
     {
         $menu = $this->model::findOrFail($id);
+        $this->deleteChildMenus($menu);
         $menu->delete();
-        return redirect()->back()->with('success', 'Menu Deleted successfully');
+        return redirect()->back()->with('success', 'Menu deleted successfully');
+    }
+
+    public function deleteChildMenus($menu)
+    {
+        foreach ($menu->children as $childMenu) {
+            $this->deleteChildMenus($childMenu); // Recursively delete child menu items
+            $childMenu->delete(); // Delete current child menu item
+        }
     }
     public function status($id)
     {

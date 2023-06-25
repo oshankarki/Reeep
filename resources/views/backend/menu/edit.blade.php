@@ -25,10 +25,8 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"> {{$module}}
-                    <a href="" class="btn btn-info">List</a>
-
+                    <a href="{{route($base_route.'index')}}" class="btn btn-info">List</a>
                 </h3>
-
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -53,26 +51,4 @@
 
     </section>
     <!-- /.content -->
-@endsection
-@section('js')
-    <script>
-        $("#title").keyup(function() {
-            var Text = $(this).val();
-            Text = Text.toLowerCase();
-            Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
-            $("#slug").val(Text);
-        });
-    </script>
-    <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-        })
-    </script>
-
 @endsection

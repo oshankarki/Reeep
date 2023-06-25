@@ -98,41 +98,31 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="{{asset('assets/img/bannerOne.jpeg')}}" alt="Image" height="850">
+                    <img class="w-100" src="{{ asset('storage/images/'.$data['bannerFirst']->image) }}" alt="Banner Image" height="850">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Reduce - Reuse - Recycle!</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">{{$data['bannerFirst']->description}}</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                @foreach($data['banners'] as $banner)
                 <div class="carousel-item">
-                    <img class="w-100" src="{{asset('assets/img/bannerTwo.jpeg')}}" alt="Image" height="850">
+                    <img class="w-100" src="{{ asset('storage/images/'.$banner->image) }}" alt="Banner Image" height="850">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-7">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Choose energy-efficient products, save money!</h1>
+                                    <h1 class="display-1 text-white mb-5 animated slideInDown">{{$banner->description}}</h1>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="{{asset('assets/img/bannerThree.webp')}}" alt="Image" height="850">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-7">
-                                    <h1 class="display-1 text-white mb-5 animated slideInDown">Unplug, switch off, and simplify!</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -144,6 +134,7 @@
             </button>
         </div>
     </div>
+</div>
 </header>
 
 
@@ -152,14 +143,13 @@
     <div class="container">
         <div class="row g-5 align-items-end">
             <div class="col-lg-3 col-md-5 wow fadeInUp" data-wow-delay="0.1s">
-                <img class="img-fluid rounded" data-wow-delay="0.1s" src="{{asset('assets/img/about.jpeg')}}" height="700">
+                <img class="img-fluid rounded" data-wow-delay="0.1s" src="{{ asset('storage/images/'.$data['about']->image) }}" height="700">
             </div>
             <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
                 <h1 class="display-1 text-primary mb-0">About</h1>
                 <p class="text-primary mb-4">REEEP</p>
                 <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
-                <p class="mb-4">The Government of Nepal emphasizes the role of reliable, affordable energy and its sustainable use for the fulfillment of basic needs and the economic growth of the country. The current Five-Year Development Plan highlights the crucial
-                    importance of the energy sector for the realization of Nepal’s development goals.</p>
+                <p class="mb-4">{{$data['about']->description}}</p>
                 <a class="btn btn-primary py-3 px-4" href="about.html">Explore More</a>
             </div>
             <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
@@ -168,7 +158,7 @@
                         <div class="border-start ps-4">
                             <i class="fa fa-users fa-3x text-primary mb-3"></i>
                             <h4 class="mb-3">Program Description</h4>
-                            <span>The Renewable Energy and Energy Efficiency Programme (REEEP) supports the creation of necessary regulatory, institutional, and private-sector conditions for the promotion of renewable energy and energy efficiency in Nepal. The programme is being implemented by the Ministry of Energy, Water Resources, and Irrigation (MoEWRI), Government of Nepal with technical assistance provided by the Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) on behalf of the German Federal Ministry for Economic Cooperation and Development (BMZ).</span>
+                            <span>{{$data['about']->program_description}}</span>
                         </div>
                     </div>
 

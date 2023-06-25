@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('title',$module.'Create') @section('content')
+@extends('layouts.app') @section('title',$module.'Details') @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
@@ -24,7 +23,8 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title"> {{$module}}
+                <h3 class="card-title">{{$module}} Details
+
                     <a href="{{route($base_route.'index')}}" class="btn btn-info">List</a>
 
                 </h3>
@@ -38,10 +38,16 @@
                     </button>
                 </div>
             </div>
-            {!!Form::open(['route' => [$base_route.'store'],'method'=>'post'])!!}
-            @include($base_view .'main_form',['button'=>'Save'])
-            {{Form::close()}}
+            <div class="card-body">
+                <div class="card" style="width: 30rem";>
+                    <img class="card-img-top" src="{{ asset('storage/images/'.$record->image) }} " alt="Card image cap" height="300" width="300">
+                    <div class="card-body" >
+                        <h3 class="card-title font-weight-bold">{{$record->title}}</h3>
+                        <p class="card-text">{{$record->description}}</p>
 
+                    </div>
+                </div>
+            </div>
             <!-- /.card-body -->
             <div class="card-footer">
                 Footer
@@ -52,7 +58,4 @@
 
     </section>
     <!-- /.content -->
-@endsection
-@section('js')
-
 @endsection
