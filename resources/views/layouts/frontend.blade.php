@@ -99,48 +99,7 @@
 @yield("content")
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-light footer mt-5 py-5 wow fadeIn " data-wow-delay="0.1s ">
-    <div class="container py-5 ">
-        <div class="row g-5 ">
-            <div class="col-lg-3 col-md-6 ">
-                <h4 class="text-white mb-4 ">Our Office</h4>
-                <p class="mb-2 "><i class="fa fa-map-marker-alt me-3 "></i>Prayag Marg, Kathmandu</p>
-                <p class="mb-2 "><i class="fa fa-phone-alt me-3 "></i>+012 345 67890</p>
-                <p class="mb-2 "><i class="fa fa-envelope me-3 "></i>info@reeep.com</p>
-                <div class="d-flex pt-2 ">
-                    <a class="btn btn-square btn-outline-light rounded-circle me-2 " href=" "><i class="fab fa-twitter "></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-2 " href=" "><i class="fab fa-facebook-f "></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-2 " href=" "><i class="fab fa-youtube "></i></a>
-                    <a class="btn btn-square btn-outline-light rounded-circle me-2 " href=" "><i class="fab fa-linkedin-in "></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 ">
-                <h4 class="text-white mb-4 ">REEEP Partners</h4>
-                <a class="btn btn-link " href=" ">
-                    Ministry of Energy, Water Resources and Irrigation (MoEWRI)</a>
-            </div>
-            <div class="col-lg-3 col-md-6 ">
-                <h4 class="text-white mb-4 ">Quick Links</h4>
-                <a class="btn btn-link " href="about.html">About Us</a>
-                <a class="btn btn-link " href="contact.html">Contact Us</a>
-                <a class="btn btn-link " href="news.html">News and evevnts</a>
-                <a class="btn btn-link " href="">Partners</a>
-
-                <a class="btn btn-link " href="downloads.html">Downloads</a>
-            </div>
-            <div class="col-lg-3 col-md-8 ">
-                <h4 class="text-white mb-4 ">Map</h4>
-                <div id="map " style="width: 100%;">
-                    <div style="z-index: 10; padding: 0 5px;background-color: hsla(0,0%,100%,.5);margin: 0; position:absolute; bottom:0px; right: 0px ">
-                        © <a href="https://www.openstreetmap.org/copyright " rel="noopener noreferrer no follow " target="_blank ">OpenStreetMap contributors</a></div>
-                    <div style="height: 200px; ">
-                        <a href="https://baato.io " rel="noopener noreferrer no follow " target="_blank "><img src="https://sgp1.digitaloceanspaces.com/baatocdn/images/BaatoLogo.svg " alt="Baato " width="80px "></img>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+    @include('partials.footer')
 </div>
 <!-- Footer End -->
 
@@ -244,6 +203,7 @@
 <script>
     new bootnavbar();
 </script>
+
 <script src="https://unpkg.com/parallax-js@1.5.0/parallax.min.js"></script>
 
 

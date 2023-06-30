@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->boolean('status');
             $table->integer('order');
+            $table->integer('type');
             $table->timestamps();
         });
     }

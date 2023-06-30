@@ -15,6 +15,8 @@ class MenuComposer
     function getMenuItems($parentId = null) {
         $menuItems = Menu::where('status', 1)
             ->where('parent_id', $parentId)
+            ->where('type','1')
+            ->orderBy('order')
             ->get();
 
         foreach ($menuItems as $menuItem) {

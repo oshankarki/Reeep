@@ -44,7 +44,8 @@ class MenuController extends BackendBaseController
                 'title'=>'required|unique:menus,title',
                 'slug'=>'required|unique:menus,slug',
                 'status'=>'required',
-                'order'=>'required'
+                'order'=>'required',
+                'type'=>'required',
             ]);
             $record=$this->model::create($request->all());
 
@@ -99,6 +100,7 @@ class MenuController extends BackendBaseController
                 'slug'=>'required',
                 'order'=>'required',
                 'status'=>'required',
+                'type'=>'required',
 
             ]);
             $data['record']=$this->model::find($id);

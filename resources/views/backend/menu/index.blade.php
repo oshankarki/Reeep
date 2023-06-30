@@ -46,6 +46,7 @@
                         <th>Title</th>
                         <th>Slug</th>
                         <th>Order</th>
+                        <th>Type</th>
                         <th>Status</th>
                         <th>Action</th>
 
@@ -58,6 +59,7 @@
                             <td>{{$record->title}}</td>
                             <td>{{$record->slug}}</td>
                             <td>{{$record->order}}</td>
+                            <td>{{$record->type==1?"Header":"footer"}}</td>
 
                             <td>
                                 <form id="toggle-form-{{$record->id}}" action="{{ route('menu.status', $record->id) }}" method="post">

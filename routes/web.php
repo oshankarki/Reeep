@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('backend')->group(function () {
     Route::resource('menu', \App\Http\Controllers\backend\MenuController::class, ['names' => 'backend.menu']);
 });
@@ -30,17 +28,56 @@ Route::prefix('backend')->group(function () {
     Route::resource('about', \App\Http\Controllers\backend\AboutController::class, ['names' => 'backend.about']);
 });
 Route::prefix('backend')->group(function () {
+    Route::resource('contact', \App\Http\Controllers\backend\ContactController::class, ['names' => 'backend.contact']);
+});
+Route::prefix('backend')->group(function () {
     Route::resource('framework', \App\Http\Controllers\backend\FrameworkController::class, ['names' => 'backend.framework']);
 });
-Route::patch('/menu-status-approval/{id}', [MenuController::class, 'status'])->name('menu.status');
-Route::get('/try', function () {
-    $data['bannerFirst'] = \App\Models\Backend\Banner::first();
-    $data['banners'] = \App\Models\Backend\Banner::get()->skip(1);
-    $data['about'] = \App\Models\Backend\About::first();
-
-    return view('welcome2',compact('data'));
+Route::prefix('backend')->group(function () {
+    Route::resource('area', \App\Http\Controllers\backend\AreaController::class, ['names' => 'backend.area']);
 });
+Route::prefix('backend')->group(function () {
+    Route::resource('news', \App\Http\Controllers\backend\NewsController::class, ['names' => 'backend.news']);
+});
+Route::prefix('backend')->group(function () {
+    Route::resource('album', \App\Http\Controllers\backend\AlbumController::class, ['names' => 'backend.album']);
+});
+Route::prefix('backend')->group(function () {
+    Route::resource('gallery', \App\Http\Controllers\backend\GalleryController::class, ['names' => 'backend.gallery']);
+});
+Route::prefix('backend')->group(function () {
+    Route::resource('resource', \App\Http\Controllers\backend\ResourceController::class, ['names' => 'backend.resource']);
+});
+Route::prefix('backend')->group(function () {
+    Route::resource('partner', \App\Http\Controllers\backend\PartnerController::class, ['names' => 'backend.partner']);
+});
+Route::prefix('backend')->group(function () {
+    Route::resource('setting', \App\Http\Controllers\backend\SettingController::class, ['names' => 'backend.setting']);
+});
+Route::get('/admin/profile', [\App\Http\Controllers\HomeController::class, 'profile'])->name('admin.profile');
+Route::get('/admin/profile/edit', [\App\Http\Controllers\HomeController::class, 'edit'])->name('profile.edit');
+Route::put('/admin/updateProfile', [\App\Http\Controllers\HomeController::class, 'update'])->name('profile.update');
+Route::get('/admin/changePassword', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('admin.password.change');
+Route::put('/admin/updatePassword', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('admin.password.update');
+
+
+Route::patch('/menu-status-approval/{id}', [\App\Http\Controllers\backend\MenuController::class, 'status'])->name('menu.status');
+Route::get('/home', [\App\Http\Controllers\frontend\HomeController::class, 'home'])->name('home');
+Route::get('/', [\App\Http\Controllers\frontend\HomeController::class, 'home'])->name('home');
+
 Route::get('/about', [\App\Http\Controllers\frontend\HomeController::class, 'about'])->name('about');
 Route::get('/framework/{id}', [\App\Http\Controllers\frontend\HomeController::class, 'framework'])->name('framework.show');
+Route::get('/area', [\App\Http\Controllers\frontend\HomeController::class, 'area'])->name('area');
+Route::get('/area/{slug}', [\App\Http\Controllers\frontend\HomeController::class, 'area_show'])->name('area.show');
+Route::get('/news', [\App\Http\Controllers\frontend\HomeController::class, 'news'])->name('news');
+Route::get('/news/{slug}', [\App\Http\Controllers\frontend\HomeController::class, 'newsShow'])->name('news.show');
+Route::get('/gallery', [\App\Http\Controllers\frontend\HomeController::class, 'gallery'])->name('gallery');
+Route::get('/resource', [\App\Http\Controllers\frontend\HomeController::class, 'resource'])->name('resource');
+Route::get('/resource/{slug}', [\App\Http\Controllers\frontend\HomeController::class, 'resourceShow'])->name('resource.show');
+Route::get('/partners', [\App\Http\Controllers\frontend\HomeController::class, 'partner'])->name('partner');
+
+
+
+
 
 

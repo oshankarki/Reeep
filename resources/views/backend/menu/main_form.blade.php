@@ -1,5 +1,11 @@
 <div class="card-body">
+    <div class="form-group">
+        {!!Form::label('type','Select Type')!!}
+        {{ Form::select('type', ['1' => 'Header', '2' => 'Footer'], null, ['class' => 'form-control','placeholder'=>'Select Type']) }}
 
+        @error('title')
+        <span class="text-danger">{{$message}}</span> @enderror
+    </div>
     <div class="form-group">
         {!! Form::label('parent_id', 'Parent Menu') !!}
         {!! Form::select('parent_id', ['' => 'Select the Menu'] + buildMenuOptions($menuItems), null, ['class' => 'form-control select2']) !!}
