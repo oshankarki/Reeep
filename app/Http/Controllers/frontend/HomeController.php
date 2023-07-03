@@ -34,9 +34,9 @@ class HomeController extends Controller
 
         return view("frontend.about",compact('about','frameworks'));
     }
-    public function framework($id)
+    public function framework($slug)
     {
-        $framework = Framework::find($id);
+        $framework = Framework::where('slug',$slug)->first();
         return view('frontend.framework',compact('framework'));
 
     }

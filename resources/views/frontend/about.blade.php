@@ -27,7 +27,6 @@
                     <p class="text-primary mb-4">REEEP</p>
                     <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
                     <p class="mb-4">{{$about->description}}</p>
-                    <a class="btn btn-primary py-3 px-4" href="about.html">Explore More</a>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="row g-5">
@@ -57,7 +56,7 @@
                         <img  src="{{ asset('storage/images/'.$framework->image) }}" alt="" height="366" width="366">
                         <div class="team-text">
                             <h4 class="mb-0">{{$framework->title}}</h4>
-                            <p class="text-primary">{{substr($framework->description, 0, 100)}} <a href="{{route('framework.show',$framework->id)}}" class="btn btn-primary">See More</a> </p>
+                            <p class="text-primary">{{substr($framework->description, 0, 100)}} <a href="{{route('framework.show',$framework->slug)}}" class="btn btn-primary">See More</a> </p>
                         </div>
                     </div>
                 </div>

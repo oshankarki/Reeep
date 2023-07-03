@@ -47,7 +47,7 @@ class FrameworkController extends BackendBaseController
                 'title' => 'required'
             ]);
 
-            $frameworkData = $request->only(['description','title','image']);
+            $frameworkData = $request->only(['description','title','image','slug']);
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -126,6 +126,8 @@ class FrameworkController extends BackendBaseController
             }
 
             $record->description = $request->input('description');
+            $record->slug = $request->input('slug');
+
             $record->save();
 
             request()->session()->flash('success', 'About Us updated successfully');

@@ -581,11 +581,10 @@ h6,
 .student_bg {
     width: 100%;
     float: left;
-    background-image: url(../images/img-3.png);
     height: auto;
     background-size: cover;
     position: relative;
-    min-height: 287px;
+    height: 287px;
     background-repeat: no-repeat;
 }
 

@@ -150,7 +150,7 @@
                 <p class="text-primary mb-4">REEEP</p>
                 <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
                 <p class="mb-4">{{$data['about']->description}}</p>
-                <a class="btn btn-primary py-3 px-4" href="about.html">Explore More</a>
+                <a class="btn btn-primary py-3 px-4" href="{{route('about')}}">Explore More</a>
             </div>
             <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="row g-5">
@@ -198,7 +198,7 @@
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <h1 class="display-5 mb-4">Working Areas</h1>
-                <a class="btn btn-primary py-3 px-4" href="areas.html">Explore More</a>
+                <a class="btn btn-primary py-3 px-4" href="{{route('area')}}">Explore More</a>
             </div>
             <div class="col-lg-6">
                 <div class="row g-4 align-items-center">
@@ -293,7 +293,7 @@
 
         @foreach ($data['album'] as $item)
             @if (count($item->gallery) > 0)
-                <div style="position: relative; display: inline-block;" class="m-3">
+                <div style="position: relative; display: inline-block;" class="m-2">
                     <!-- Button trigger modal -->
                     <img src="{{ asset('storage/images/' . $item->gallery[0]->image) }}" alt="image" height="320"
                          width="340" class="rounded">
@@ -310,14 +310,14 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Image album</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{{$item->title}}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div id="carouselExampleControls{{$item->id}}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active" style="height: 350px; background-color: #000">
+                                        <div class="carousel-item active" style="height: 400px; background-color: #000">
                                             <div class="d-block w-100 p-4 text-center">
                                                 <h1 style="margin-top: 120px" class="text-white">
                                                     {{$item->title}}
@@ -325,10 +325,14 @@
                                             </div>
                                         </div>
                                         @foreach($item->gallery as $pic)
-                                            <div class="carousel-item" style="height: 350px">
+                                            <div class="carousel-item " style="height: 400px">
                                                 <img src="{{ asset('storage/images/' . $pic->image) }}" class="d-block w-100"
                                                      alt="..." height="350px">
+                                                <div class="text-dark">
+                                                    <p class="text-dark">{{$pic->title}}</p>
+                                                </div>
                                             </div>
+
                                         @endforeach
                                     </div>
                                     <button class="carousel-control-prev" type="button"
@@ -376,7 +380,7 @@
                     @foreach($data['resources'] as $resource)
                     <div class="col-md-4">
                         <div class="box_main">
-                            <div class="student_bg"><img src="{{ asset('storage/images/' . $resource->image) }}" class="student_bg"></div>
+                            <div class="student_bg"><img src="{{ asset('storage/images/' . $resource->image) }}" class="student_bg" ></div>
                             <h4 class="hannery_text">{{$resource->title}}</h4>
                             <p class="fact_text">{{substr($resource->description, 0, 100)}}<a class="text-primary" href="{{route('resource.show',$resource->slug)}}">Read More</a>.</p>
                             <p class="fact-text m-3"><a href="{{ asset('storage/pdfs/'.$resource->pdf) }}" class="btn btn-primary">View PDF</a></p>
@@ -490,10 +494,20 @@
     </div>
 </div>
 <!-- Copyright End -->
+@if(session()->has('success'))
+    <div class="alert alert-success" style="position:fixed; bottom:10px; right:10px; z-index:999;">
+        {{ session()->get('success') }}
+    </div>
 
+    <script>
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+@endif
 
 <!-- Back to Top -->
-<a href="# " class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top "><i class="bi bi-arrow-up "></i></a>
+<a href="# " class="btn btn-lg btn-dark btn-lg-square rounded-circle back-to-top "><i class="bi bi-arrow-up "></i></a>
 <script>
     var markers = [];
 

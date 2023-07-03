@@ -28,6 +28,8 @@
                             </p>
                             <p class="">
                             <a href="{{ asset('storage/pdfs/'.$resource->pdf) }}" class="btn btn-primary">View PDF</a>
+                                <a href="{{ asset('storage/pdfs/'.$resource->pdf) }}" class="btn btn-primary" download><i class="fa fa-download"></i></a>
+
                             </p>
 
                         </div>

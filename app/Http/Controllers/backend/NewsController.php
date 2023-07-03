@@ -103,7 +103,6 @@ class NewsController extends BackendBaseController
     {
         try {
             $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 'description' => 'required',
                 'title' => 'required',
                 'slug' => 'required'
@@ -127,16 +126,17 @@ class NewsController extends BackendBaseController
                 $image->storeAs('public/images', $imageName);
                 $record->image = $imageName;
             }
-
+            $record->title = $request->input('title');
             $record->description = $request->input('description');
+            $record->slug = $request->input('slug');
             $record->save();
 
-            request()->session()->flash('success', 'Working Area updated successfully');
+            request()->session()->flash('success', 'News updated successfully');
         } catch (\Exception $exception) {
             request()->session()->flash('error', 'Error: ' . $exception->getMessage());
         }
 
-        return redirect()->route('backend.about.index');
+        return redirect()->route('backend.news.index');
     }
 
 

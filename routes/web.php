@@ -66,7 +66,8 @@ Route::get('/home', [\App\Http\Controllers\frontend\HomeController::class, 'home
 Route::get('/', [\App\Http\Controllers\frontend\HomeController::class, 'home'])->name('home');
 
 Route::get('/about', [\App\Http\Controllers\frontend\HomeController::class, 'about'])->name('about');
-Route::get('/framework/{id}', [\App\Http\Controllers\frontend\HomeController::class, 'framework'])->name('framework.show');
+Route::get('/frameworks', [\App\Http\Controllers\frontend\HomeController::class, 'about'])->name('about');
+Route::get('/framework/{slug}', [\App\Http\Controllers\frontend\HomeController::class, 'framework'])->name('framework.show');
 Route::get('/area', [\App\Http\Controllers\frontend\HomeController::class, 'area'])->name('area');
 Route::get('/area/{slug}', [\App\Http\Controllers\frontend\HomeController::class, 'area_show'])->name('area.show');
 Route::get('/news', [\App\Http\Controllers\frontend\HomeController::class, 'news'])->name('news');

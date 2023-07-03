@@ -16,22 +16,22 @@
             </nav>
         </div>
     </div>
-    <div class="row mb-2 justify-content-center">
-        <div class="col-md-6">
-            <div class="card flex-md-row mb-4 box-shadow h-md-250">
-                <div class="card-body d-flex flex-column align-items-start">
-                    <h3 class="mb-0">
-                        <a class="text-dark" href="#">{{$area->title}}</a>
-                    </h3>
-                    <p class="card-text mb-auto">{{$area->description}}</p>
-                </div>
-                <img class="card-img-right flex-auto d-none d-md-block" src="{{ asset('storage/images/'.$area->image) }}" alt="Area" height="20">
+    <section id="about" class="about">
+            <div class="container aos-init aos-animate" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-lg-6 order-1 order-lg-2 aos-init aos-animate" data-aos="fade-left" data-aos-delay="100">
+                            <img src="{{ asset('storage/images/'.$area->image) }}" class="" alt="" height="300" width="500">
+                        </div>
+                        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content aos-init aos-animate" data-aos="fade-right" data-aos-delay="100">
+                            <h3>{{$area->title}}</h3>
+                            <p class="fst-italic">
+                                {{$area->description}}
+                            </p>
 
+                        </div>
+                    </div>
             </div>
-        </div>
-    </div>
-
-
-
+            <br>
+    </section>
 @endsection
 
