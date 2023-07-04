@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\MenuRequest;
 use App\Models\Backend\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator;
 
 class MenuController extends BackendBaseController
 {
@@ -37,33 +39,23 @@ class MenuController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
-        try{
-            $request->validate([
-                'title'=>'required|unique:menus,title',
-                'slug'=>'required|unique:menus,slug',
-                'status'=>'required',
-                'order'=>'required',
-                'type'=>'required',
-            ]);
-            $record=$this->model::create($request->all());
+        try {
+            $record = $this->model::create($request->all());
 
-            if($record)
-            {
-                request()->session()->flash('success',($this->__loadDataToView($this->module))."Created");
-            }else{
-                request()->session()->flash('error',($this->__loadDataToView($this->module))."Creation Failed ");
-
+            if ($record) {
+                request()->session()->flash('success', ($this->__loadDataToView($this->module))."Created");
+            } else {
+                request()->session()->flash('error', ($this->__loadDataToView($this->module))."Creation Failed ");
             }
-        }
-        catch(\Exception $exception){
-            request()->session()->flash('error',"Error:".$exception->getMessage());
-
+        } catch (\Exception $exception) {
+            request()->session()->flash('error', "Error: ".$exception->getMessage());
         }
 
         return redirect()->route($this->__loadDataToView($this->base_route.'index'));
     }
+
 
 
     /**
@@ -92,17 +84,9 @@ class MenuController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(MenuRequest $request, string $id)
     {
         try{
-            $request->validate([
-                'title'=>'required',
-                'slug'=>'required',
-                'order'=>'required',
-                'status'=>'required',
-                'type'=>'required',
-
-            ]);
             $data['record']=$this->model::find($id);
             if(!$data['record' ]){
                 request()->session()->flash('error',"Error:Invalid Request");

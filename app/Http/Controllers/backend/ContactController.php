@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\ContactRequest;
 use App\Models\Backend\Contact;
 use App\Models\Backend\Framework;
 use Illuminate\Http\Request;
@@ -24,16 +25,9 @@ class ContactController extends BackendBaseController
         $data['records'] = $this->model::get();
         return view($this->__loadDataToView($this->base_view.'index'), compact('data'));
     }
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         try {
-            $request->validate([
-                'name' => 'required',
-                'email' => 'required',
-                'phone' => 'required',
-                'topic' => 'required'
-            ]);
-
             $record = $this->model::create($request->all());
 
             if ($record) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\AlbumRequest;
 use App\Models\Backend\Album;
 use Illuminate\Http\Request;
 
@@ -36,12 +37,9 @@ class AlbumController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
         try{
-            $request->validate([
-                'title'=>'required|unique:albums,title'
-            ]);
             $record=$this->model::create($request->all());
 
             if($record)
@@ -74,13 +72,9 @@ class AlbumController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AlbumRequest $request, string $id)
     {
         try{
-            $request->validate([
-                'title'=>'required',
-
-            ]);
             $data['record']=$this->model::find($id);
             if(!$data['record' ]){
                 request()->session()->flash('error',"Error:Invalid Request");

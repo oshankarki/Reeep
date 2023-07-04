@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\AboutRequest;
 use App\Models\Backend\About;
 use Illuminate\Http\Request;
+
 
 class AboutController extends BackendBaseController
 {
@@ -36,15 +38,9 @@ class AboutController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AboutRequest $request)
     {
         try {
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'required',
-                'program_description' => 'required'
-            ]);
-
             $aboutData = $request->only(['description','program_description','image']);
 
             if ($request->hasFile('image')) {
@@ -96,14 +92,9 @@ class AboutController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AboutRequest $request, string $id)
     {
         try {
-            $request->validate([
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'required'
-            ]);
-
             $record = $this->model::find($id);
             if (!$record) {
                 request()->session()->flash('error', "Error: Invalid Request");
@@ -124,6 +115,7 @@ class AboutController extends BackendBaseController
             }
 
             $record->description = $request->input('description');
+            $record->program_description = $request->input('program_description');
             $record->save();
 
             request()->session()->flash('success', 'About Us updated successfully');

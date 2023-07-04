@@ -42,10 +42,10 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>S.N</th>
-                        <th>Image</th>
-                        <th>Description</th>
-                        <th>Action</th>
+                        <th>{{App::getLocale()=="en"?"S.N.":"क्र."}}</th>
+                        <th>{{App::getLocale()=="en"?"Image":"फोटो"}}</th>
+                        <th>{{App::getLocale()=="en"?"Description":"वर्णन"}}</th>
+                        <th>{{App::getLocale()=="en"?"Action":"कार्य"}}</th>
 
                     </tr>
                     </thead>
@@ -54,7 +54,9 @@
                         <tr>
                             <td>{{$loop->index+1}}</td>
                             <td><img src="{{ asset('storage/images/'.$record->image) }}" alt="Banner Image" height="100px" width="100"></td>
-                            <td>{{substr($record->description, 0, 30)}}</td>
+                            <td>
+                                {{ mb_substr($record->description[App::getLocale()],0,50) }}....
+                            </td>
 
 
                             <td>

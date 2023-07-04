@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\SettingRequest;
 use App\Models\Backend\Setting;
 use Illuminate\Http\Request;
 
@@ -36,19 +37,9 @@ class SettingController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SettingRequest $request)
     {
         try{
-            $request->validate([
-                'office_location'=>'required',
-                'office_phone'=>'required|numeric',
-                'office_email'=>'required',
-                'facebook_link'=>'required|url',
-                'instagram_link'=>'required|url',
-                'youtube_link'=>'required|url',
-                'linkedin_link'=>'required|url',
-
-            ]);
             $record=$this->model::create($request->all());
 
             if($record)
@@ -94,17 +85,9 @@ class SettingController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SettingRequest $request, string $id)
     {
         try{
-            $request->validate([
-                'title'=>'required',
-                'slug'=>'required',
-                'order'=>'required',
-                'status'=>'required',
-                'type'=>'required',
-
-            ]);
             $data['record']=$this->model::find($id);
             if(!$data['record' ]){
                 request()->session()->flash('error',"Error:Invalid Request");

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\GalleryRequest;
 use App\Models\Backend\Album;
 use App\Models\Backend\Area;
 use App\Models\Backend\Gallery;
@@ -39,16 +40,10 @@ class GalleryController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(GalleryRequest $request)
     {
 
         try {
-            $request->validate([
-                'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'title.*' => 'required',
-                'album_id' => 'required',
-            ]);
-
             $albumId = $request->input('album_id');
             $images = $request->file('image');
             $titles = $request->input('title');
@@ -111,14 +106,9 @@ class GalleryController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(GalleryRequest $request, string $id)
     {
         try {
-            $request->validate([
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'title'=>'required',
-            ]);
-
             $record = $this->model::find($id);
             if (!$record) {
                 request()->session()->flash('error', "Error: Invalid Request");

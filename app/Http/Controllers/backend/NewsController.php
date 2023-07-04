@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\NewsRequest;
 use App\Models\Backend\News;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class NewsController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
         try {
             $request->validate([
@@ -99,7 +100,7 @@ class NewsController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(NewsRequest $request, string $id)
     {
         try {
             $request->validate([

@@ -55,6 +55,16 @@
                 </form>
             </li>
         </ul>
+        <form action="{{ route('changeLang') }}" method="get">
+            <div class="container">
+                <select class="changeLang text-dark" name="lang" style="background: none;border:none;">
+                    <option style="background: #2D8C59" value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                    <option style="background: #2D8C59" value="np" {{ session()->get('locale') == 'np' ? 'selected' : '' }}>
+                        नेपाली
+                    </option>
+                </select>
+            </div>
+        </form>
     </nav>
     <!-- /.navbar -->
 
@@ -405,6 +415,7 @@
 <script src="{{asset('assets/backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- Select2 -->
 <script src="{{asset('assets/backend/plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $("#menu_table").treetable({ expandable: true });
 </script>
@@ -426,6 +437,16 @@
             theme: 'bootstrap4'
         })
     })
+</script>
+<script type="text/javascript">
+
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function(e){
+
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+
 </script>
 @yield('scripts')
 @yield('js')

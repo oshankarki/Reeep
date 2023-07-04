@@ -92,6 +92,16 @@
             @include('partials.homemenu')
         </div>
     </div>
+        <form action="{{ route('changeLang') }}" method="get">
+            <div class="container">
+                <select class="changeLang text-white" name="lang" style="background: none;border:none;">
+                    <option style="background: #2D8C59" value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                    <option style="background: #2D8C59" value="np" {{ session()->get('locale') == 'np' ? 'selected' : '' }}>
+                        नेपाली
+                    </option>
+                </select>
+            </div>
+        </form>
 
 </nav>
     <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
@@ -149,7 +159,8 @@
                 <h1 class="display-1 text-primary mb-0">About</h1>
                 <p class="text-primary mb-4">REEEP</p>
                 <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
-                <p class="mb-4">{{$data['about']->description}}</p>
+
+                <p class="mb-4">{{$data['about']->description[App::getLocale()]}}</p>
                 <a class="btn btn-primary py-3 px-4" href="{{route('about')}}">Explore More</a>
             </div>
             <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
@@ -158,7 +169,7 @@
                         <div class="border-start ps-4">
                             <i class="fa fa-users fa-3x text-primary mb-3"></i>
                             <h4 class="mb-3">Program Description</h4>
-                            <span>{{$data['about']->program_description}}</span>
+                            <span>{{$data['about']->program_description[App::getLocale()]}}</span>
                         </div>
                     </div>
 
@@ -433,24 +444,36 @@
                             <div class="form-floating">
                                 <input type="text" class="form-control bg-light border-0" id="gname" name="name">
                                 <label for="name">Your Name</label>
+                                @error('name')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating">
                                 <input type="email" class="form-control bg-light border-0" id="gmail" name="email">
                                 <label for="email">Your Email</label>
+                                @error('email')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating">
                                 <input type="text" class="form-control bg-light border-0" id="cname" name="phone">
                                 <label for="phone">Your Mobile</label>
+                                @error('phone')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-floating">
                                 <input type="text" class="form-control bg-light border-0" id="cage"  name="topic" >
                                 <label for="topic">Topic</label>
+                                @error('topic')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12">
@@ -541,6 +564,7 @@
     showLocation();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function bootnavbar(options) {
         const defaultOption = {
@@ -586,6 +610,16 @@
 </script>
 <script>
     new bootnavbar();
+</script>
+<script type="text/javascript">
+
+    var url = "{{ route('changeLang') }}";
+
+    $(".changeLang").change(function(e){
+
+        window.location.href = url + "?lang="+ $(this).val();
+    });
+
 </script>
 <script src="https://unpkg.com/parallax-js@1.5.0/parallax.min.js"></script>
 

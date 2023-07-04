@@ -58,11 +58,15 @@
                     <tr>
                         <td>
                             {!! Form::file('image[]', ['class' => 'form-control-file', 'placeholder' => 'Image', 'onchange' => 'previewImage(this)', 'accept' => 'image/*']) !!}
-                            @error('image')
+                            @error('image.*')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </td>
-                        <td><input type="text" name="title[]" class="form-control" placeholder="Enter Image Title"/></td>
+                        <td><input type="text" name="title[]" class="form-control" placeholder="Enter Image Title"/>
+                            @error('title.*')
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </td>
                         <td>
                             <a class="btn btn-block btn-warning sa-warning remove_row "><i class="fa fa-trash"></i></a>
                         </td>

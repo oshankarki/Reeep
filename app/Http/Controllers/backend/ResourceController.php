@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\ResourceRequest;
 use App\Models\Backend\Resource;
 use Illuminate\Http\Request;
 
@@ -36,17 +37,9 @@ class ResourceController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ResourceRequest $request)
     {
         try {
-            $request->validate([
-                'pdf' => 'required|mimes:pdf',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'required',
-                'title' => 'required',
-                'slug' => 'required'
-            ]);
-
             $newsData = $request->only(['description', 'title', 'slug']);
 
             if ($request->hasFile('image')) {
@@ -104,15 +97,9 @@ class ResourceController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ResourceRequest $request, string $id)
     {
         try {
-            $request->validate([
-                'description' => 'required',
-                'title' => 'required',
-                'slug' => 'required'
-            ]);
-
             $record = $this->model::find($id);
             if (!$record) {
                 request()->session()->flash('error', "Error: Invalid Request");

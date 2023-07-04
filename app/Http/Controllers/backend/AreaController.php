@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\AreasRequest;
 use App\Models\Backend\Area;
 use Illuminate\Http\Request;
 
@@ -36,17 +37,9 @@ class AreaController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AreasRequest $request)
     {
         try {
-            $request->validate([
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'required',
-                'title' => 'required',
-                'slug' => 'required'
-
-            ]);
-
             $areaData = $request->only(['description','title','slug','image']);
 
             if ($request->hasFile('image')) {
@@ -98,15 +91,9 @@ class AreaController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AreasRequest $request, string $id)
     {
         try {
-            $request->validate([
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'required',
-                'title'=>'required',
-            ]);
-
             $record = $this->model::find($id);
             if (!$record) {
                 request()->session()->flash('error', "Error: Invalid Request");

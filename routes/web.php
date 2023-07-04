@@ -21,6 +21,9 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::prefix('backend')->group(function () {
     Route::resource('menu', \App\Http\Controllers\backend\MenuController::class, ['names' => 'backend.menu']);
 });
+
+Route::get('lang/change', [\App\Http\Controllers\LangController::class, 'change'])->name('changeLang');
+
 Route::prefix('backend')->group(function () {
     Route::resource('banner', \App\Http\Controllers\backend\BannerController::class, ['names' => 'backend.banner']);
 });

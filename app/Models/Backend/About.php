@@ -10,4 +10,10 @@ class About extends Model
     use HasFactory;
     protected $table='abouts';
     protected $fillable = ['image','description','program_description'];
+
+    protected $casts = [
+        'program_description' => 'json',
+        'description' => 'json',
+    ];
 }
+

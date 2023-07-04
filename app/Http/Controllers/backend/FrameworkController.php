@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\FrameworkRequest;
 use App\Models\Backend\About;
 use App\Models\Backend\Framework;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class FrameworkController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FrameworkRequest $request)
     {
 
         try {
@@ -98,7 +99,7 @@ class FrameworkController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FrameworkRequest $request, string $id)
     {
         try {
             $request->validate([

@@ -47,18 +47,18 @@
                                 <img class="img-fluid rounded" data-wow-delay="0.1s" src="{{ asset('storage/images/'.$record->image) }}" height="700">
                             </div>
                             <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                                <h1 class="display-1 text-primary mb-0">About</h1>
+                                <h1 class="display-1 text-primary mb-0">{{App::getLocale()=="en"?"About us":"हाम्रो बारेमा"}}</h1>
                                 <p class="text-primary mb-4">REEEP</p>
-                                <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
-                                <p class="mb-4">{{$record->description}}.</p>
+                                <h1 class="display-5 mb-4">{{App::getLocale()=="en"?"Renewable Energy and Energy Efficiency Programme":"नवीन्यर्ण्य ऊर्जा र ऊर्जा कुशलता कार्यक्रम"}}</h1>
+                                <p class="mb-4">{{$record->description[App::getLocale()] }}</p>
                             </div>
                             <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                                 <div class="row g-5">
                                     <div class="col-12 col-sm-6 col-lg-12">
                                         <div class="border-start ps-4">
                                             <i class="fa fa-users fa-3x text-primary mb-3"></i>
-                                            <h4 class="mb-3">Program Description</h4>
-                                            <span>{{$record->program_description}}.</span>
+                                            <h4 class="mb-3">{{App::getLocale()=="en"?"Program Description":"कार्यक्रम विवरण"}}</h4>
+                                            <span>{{$record->program_description[App::getLocale()] }}</span>
                                         </div>
                                     </div>
 

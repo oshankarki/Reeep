@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
             $table->string('image');
-            $table->longText('description');
-            $table->longText('program_description');
+            $table->json('description');
+            $table->json('program_description');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\PartnerRequest;
 use App\Models\Backend\Partner;
 use Illuminate\Http\Request;
 
@@ -36,16 +37,9 @@ class PartnerController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PartnerRequest $request)
     {
         try {
-            $request->validate([
-                'link' => 'required|url',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'title' => 'required',
-                'slug' => 'required'
-            ]);
-
             $partnerData = $request->only(['description', 'title', 'slug','link']);
 
             if ($request->hasFile('image')) {
@@ -96,15 +90,9 @@ class PartnerController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Partner $request, string $id)
     {
         try {
-            $request->validate([
-                'link' => 'required|url',
-                'title' => 'required',
-                'slug' => 'required'
-            ]);
-
             $record = $this->model::find($id);
             if (!$record) {
                 request()->session()->flash('error', "Error: Invalid Request");

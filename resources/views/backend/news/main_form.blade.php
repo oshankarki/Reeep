@@ -13,7 +13,7 @@
         {!!Form::label('category','Select Category')!!}
         {{ Form::select('category', ['1' => 'News', '2' => 'Events'], null, ['class' => 'form-control','placeholder'=>'Select Category']) }}
 
-        @error('title')
+        @error('category')
         <span class="text-danger">{{$message}}</span> @enderror
     </div>
     <div class="form-group">
