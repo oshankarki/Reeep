@@ -136,4 +136,9 @@ class AboutController extends BackendBaseController
         $about->delete();
         return redirect()->back()->with('success', 'About Us deleted successfully');
     }
+    public function tmpUpload(Request $request)
+    {
+        $image= $request->file('image');
+        return $image->getClientOriginalName();
+    }
 }

@@ -71,4 +71,21 @@
         }
     }
 </script>
+<script>
+    // Get a reference to the file input element
+    const inputElement = document.getElementById('file');
+
+    // Create a FilePond instance
+    const pond = FilePond.create(inputElement);
+    FilePond.setOptions({
+        server: {
+            process:'/tmp-upload',
+            revert:'/tmp-delete',
+            headers:{
+                'X-CSRF-TOKEN':'{{csrf_token()}}'
+            }
+        },
+        allowMultiple: true,
+    })
+</script>
 @endsection

@@ -24,9 +24,20 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">List {{$module}}
-                    <a href="{{route($base_route.'create')}}" class="btn btn-info">Create</a>
+                    <a class="btn btn-warning"
+                       href="{{ url('/export-contacts') }}">
+                        Export Contacts Data
+                    </a>
 
                 </h3>
+{{--                <form action="{{ route('uploadContacts') }}" enctype="multipart/form-data" method="POST">--}}
+{{--                    @csrf--}}
+{{--                    <div class="col-lg-12 py-3">--}}
+{{--                        <label for="users">Upload Contacts File</label>--}}
+{{--                        <input type="file" class="form-control" style="padding: 3px;" name="contacts" required />--}}
+{{--                    </div>--}}
+{{--                    <button type="submit" class="btn btn-success" name="upload">Upload</button>--}}
+{{--                </form>--}}
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">

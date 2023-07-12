@@ -25,6 +25,8 @@
             <div class="card-header">
                 <h3 class="card-title">List {{$module}}
                     <a href="{{route($base_route.'create')}}" class="btn btn-info">Create</a>
+                    <a href="{{route('menu.menu_order')}}" class="btn btn-primary">Reorder Menu</a>
+
 
                 </h3>
 

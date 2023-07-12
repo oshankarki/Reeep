@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\ContactRequest;
+use App\Mail\ContactMail;
 use App\Models\Backend\About;
 use App\Models\Backend\Album;
 use App\Models\Backend\Area;
+use App\Models\Backend\Contact;
 use App\Models\Backend\Framework;
 use App\Models\Backend\News;
 use App\Models\Backend\Partner;
 use App\Models\Backend\Resource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail as MyMail;
 
 class HomeController extends Controller
 {
@@ -80,6 +84,22 @@ class HomeController extends Controller
     {
         $partners = Partner::get();
         return view('frontend.partner',compact('partners'));
+    }
+    public function store(ContactRequest $request)
+    {
+        try {
+
+            $record = Contact::create($request->all());
+            MyMail::to($request['email'])->send(new ContactMail($request['name']));
+
+            if ($record) {
+                return redirect()->back()->with('success', "Thank you for contacting us!!");
+            } else {
+                return redirect()->back()->withErrors("Try Again");
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back()->withErrors($exception->getMessage());
+        }
     }
 
 }

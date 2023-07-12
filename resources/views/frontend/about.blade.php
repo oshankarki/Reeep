@@ -26,7 +26,7 @@
                     <h1 class="display-1 text-primary mb-0">About</h1>
                     <p class="text-primary mb-4">REEEP</p>
                     <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
-                    <p class="mb-4">{{$about->description}}</p>
+                    <p class="mb-4">{{$about->description[App::getLocale()]}}</p>
                 </div>
                 <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                     <div class="row g-5">
@@ -34,7 +34,7 @@
                             <div class="border-start ps-4">
                                 <i class="fa fa-users fa-3x text-primary mb-3"></i>
                                 <h4 class="mb-3">Program Description</h4>
-                                <span>{{$about->program_description}}</span>
+                                <span>{{$about->program_description[App::getLocale()]}}</span>
                             </div>
                         </div>
 

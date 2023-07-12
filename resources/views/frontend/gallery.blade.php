@@ -15,56 +15,61 @@
     <div class="container-xxl py-5" id="gallery">
         <div class="container">
             <!-- model1 -->
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h1 class="display-5 mb-5">Gallery</h1>
+            </div>
+
             @foreach ($album as $item)
                 @if (count($item->gallery) > 0)
-                    <div style="position: relative; display: inline-block;" class="m-3">
+                    <div style="position: relative; display: inline-block;" class="m-2">
                         <!-- Button trigger modal -->
                         <img src="{{ asset('storage/images/' . $item->gallery[0]->image) }}" alt="image" height="320"
                              width="340" class="rounded">
                         <button type="button" class="rounded-circle mx-2 centered-button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal{{ $item->id }}">
+                                data-bs-target="#exampleModal{{$item->id}}">
                             <i class="fa fa-eye"></i>
                         </button>
                     </div>
 
 
                     {{--                    model --}}
-                    <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1"
-                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Image album</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{$item->title}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="carouselExampleControls{{ $item->id }}" class="carousel slide"
-                                         data-bs-ride="carousel">
+                                    <div id="carouselExampleControls{{$item->id}}" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
-                                            <div class="carousel-item active" style="height: 350px; background-color: #000">
+                                            <div class="carousel-item active" style="height: 400px; background-color: #000">
                                                 <div class="d-block w-100 p-4 text-center">
                                                     <h1 style="margin-top: 120px" class="text-white">
-                                                        {{ $item->title }}
+                                                        {{$item->title}}
                                                     </h1>
                                                 </div>
                                             </div>
-                                            @foreach ($item->gallery as $pic)
-                                                <div class="carousel-item" style="height: 350px">
-                                                    <img src="{{ asset('storage/images/' . $pic->image) }}"
-                                                         class="d-block w-100" alt="..." height="350px">
+                                            @foreach($item->gallery as $pic)
+                                                <div class="carousel-item " style="height: 400px">
+                                                    <img src="{{ asset('storage/images/' . $pic->image) }}" class="d-block w-100"
+                                                         alt="..." height="350px">
+                                                    <div class="text-dark">
+                                                        <p class="text-dark">{{$pic->title}}</p>
+                                                    </div>
                                                 </div>
+
                                             @endforeach
                                         </div>
                                         <button class="carousel-control-prev" type="button"
-                                                data-bs-target="#carouselExampleControls{{ $item->id }}"
-                                                data-bs-slide="prev">
+                                                data-bs-target="#carouselExampleControls{{$item->id}}" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Previous</span>
                                         </button>
                                         <button class="carousel-control-next" type="button"
-                                                data-bs-target="#carouselExampleControls{{ $item->id }}"
-                                                data-bs-slide="next">
+                                                data-bs-target="#carouselExampleControls{{$item->id}}" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                             <span class="visually-hidden">Next</span>
                                         </button>
@@ -76,9 +81,12 @@
                     </div>
 
                     <!-- Modal -->
+
                 @endif
             @endforeach
+
         </div>
 
     </div>
+
 @endsection

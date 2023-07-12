@@ -1,109 +1,36 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Queue Connection Name
-    |--------------------------------------------------------------------------
-    |
-    | Laravel's queue API supports an assortment of back-ends via a single
-    | API, giving you convenient access to each back-end using the same
-    | syntax for every one. Here you may define a default connection.
-    |
-    */
-
-    'default' => env('QUEUE_CONNECTION', 'sync'),
-
-    /*
-    |--------------------------------------------------------------------------
-    | Queue Connections
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure the connection information for each server that
-    | is used by your application. A default configuration has been added
-    | for each back-end shipped with Laravel. You are free to add more.
-    |
-    | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
-    |
-    */
-
-    'connections' => [
-
-        'sync' => [
-            'driver' => 'sync',
-        ],
-
-        'database' => [
-            'driver' => 'database',
-            'table' => 'jobs',
-            'queue' => 'default',
-            'retry_after' => 90,
-            'after_commit' => false,
-        ],
-
-        'beanstalkd' => [
-            'driver' => 'beanstalkd',
-            'host' => 'localhost',
-            'queue' => 'default',
-            'retry_after' => 90,
-            'block_for' => 0,
-            'after_commit' => false,
-        ],
-
-        'sqs' => [
-            'driver' => 'sqs',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'prefix' => env('SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
-            'queue' => env('SQS_QUEUE', 'default'),
-            'suffix' => env('SQS_SUFFIX'),
-            'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-            'after_commit' => false,
-        ],
-
-        'redis' => [
-            'driver' => 'redis',
-            'connection' => 'default',
-            'queue' => env('REDIS_QUEUE', 'default'),
-            'retry_after' => 90,
-            'block_for' => null,
-            'after_commit' => false,
-        ],
-
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Job Batching
-    |--------------------------------------------------------------------------
-    |
-    | The following options configure the database and table that store job
-    | batching information. These options can be updated to any database
-    | connection and table which has been defined by your application.
-    |
-    */
-
-    'batching' => [
-        'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'job_batches',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Failed Queue Jobs
-    |--------------------------------------------------------------------------
-    |
-    | These options configure the behavior of failed queue job logging so you
-    | can control which database and table are used to store the jobs that
-    | have failed. You may change them to any database / table you wish.
-    |
-    */
-
-    'failed' => [
-        'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
-        'database' => env('DB_CONNECTION', 'mysql'),
-        'table' => 'failed_jobs',
-    ],
-
+    'api_site_key'                  => env('RECAPTCHA_SITE_KEY', ''),
+    'api_secret_key'                => env('RECAPTCHA_SECRET_KEY', ''),
+    // changed in v4.0.0
+    'version'                       => 'v2', // supported: "v3"|"v2"|"invisible"
+    // @since v3.4.3 changed in v4.0.0
+    'curl_timeout'                  => 10,
+    'skip_ip'                       => env('RECAPTCHA_SKIP_IP', []), // array of IP addresses - String: dotted quad format e.g.: "127.0.0.1", IP/CIDR netmask eg. 127.0.0.0/24, also 127.0.0.1 is accepted and /32 assumed
+    // @since v3.2.0 changed in v4.0.0
+    'default_validation_route'      => 'biscolab-recaptcha/validate',
+    // @since v3.2.0 changed in v4.0.0
+    'default_token_parameter_name' => 'token',
+    // @since v3.6.0 changed in v4.0.0
+    'default_language'             => null,
+    // @since v4.0.0
+    'default_form_id'              => 'biscolab-recaptcha-invisible-form', // Only for "invisible" reCAPTCHA
+    // @since v4.0.0
+    'explicit'                     => false, // true|false
+    // @since v4.3.0
+    'api_domain'                   => "www.google.com", // default value is "www.google.com"
+    // @since v5.1.0
+    'empty_message'                => false,
+    // @since v5.1.0
+    'error_message_key'            => 'validation.recaptcha',
+    // @since v4.0.0
+    'tag_attributes'               => [
+        'theme'                    => 'light', // "light"|"dark"
+        'size'                     => 'normal', // "normal"|"compact"
+        'tabindex'                 => 0,
+        'callback'                 => null, // DO NOT SET "biscolabOnloadCallback"
+        'expired-callback'         => null, // DO NOT SET "biscolabOnloadCallback"
+        'error-callback'           => null, // DO NOT SET "biscolabOnloadCallback"
+    ]
 ];

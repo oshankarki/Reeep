@@ -37,6 +37,16 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css" rel="stylesheet" /> {{-- parrallx--}}
     <link rel="stylesheet" href="https://unpkg.com/parallax-js@1.5.0/parallax.min.css">
     <style>
+        .lang-button {
+            background: #2D8C59;
+            border: none;
+            color: white;
+        }
+
+        .lang-button.selected {
+            background: green;
+        }
+
         .dropdown-menu {
             margin-top: 0;
             background-color: transparent;
@@ -62,6 +72,14 @@
             right: 100%;
             left: auto;
         }
+        .area_image:hover{
+            height:100px;
+        }
+        .gallery-image:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
 
         @media (min-width: 768px) {
             .dropdown-menu .dropdown .dropdown-menu {
@@ -77,6 +95,7 @@
                 color: white;
             }
         }
+
     </style>
 </head>
 
@@ -92,16 +111,29 @@
             @include('partials.homemenu')
         </div>
     </div>
-        <form action="{{ route('changeLang') }}" method="get">
-            <div class="container">
-                <select class="changeLang text-white" name="lang" style="background: none;border:none;">
-                    <option style="background: #2D8C59" value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                    <option style="background: #2D8C59" value="np" {{ session()->get('locale') == 'np' ? 'selected' : '' }}>
-                        नेपाली
-                    </option>
-                </select>
+
+    <form action="{{ route('changeLang') }}" method="get">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                        <div class="btn-group">
+                            <button type="submit" name="lang" value="en" class="btn btn-dark lang-button {{ session()->get('locale') == 'en' ? 'selected' : '' }}">
+                                English
+                            </button>
+                            <button type="submit" name="lang" value="np" class="btn btn-dark lang-button {{ session()->get('locale') == 'np' ? 'selected' : '' }}">
+                                नेपाली
+                            </button>
+                        </div>
+                </div>
             </div>
-        </form>
+        </div>
+    </form>
+
+
+
+    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
 </nav>
     <div class="container-fluid p-0 wow fadeIn" data-wow-delay="0.1s">
@@ -156,19 +188,19 @@
                 <img class="img-fluid rounded" data-wow-delay="0.1s" src="{{ asset('storage/images/'.$data['about']->image) }}" height="700">
             </div>
             <div class="col-lg-6 col-md-7 wow fadeInUp" data-wow-delay="0.3s">
-                <h1 class="display-1 text-primary mb-0">About</h1>
+                <h1 class="display-1 text-primary mb-0">{{App::getLocale()=="en"?"About":"हाम्रो बारेमा"}}</h1>
                 <p class="text-primary mb-4">REEEP</p>
-                <h1 class="display-5 mb-4">Renewable Energy and Energy Efficiency Programme</h1>
+                <h1 class="display-5 mb-4">{{App::getLocale()=="en"?"Renewable Energy and Energy Efficiency Programme":"नवीन्यर्ण्य ऊर्जा र ऊर्जा कुशलता कार्यक्रम"}}</h1>
 
                 <p class="mb-4">{{$data['about']->description[App::getLocale()]}}</p>
-                <a class="btn btn-primary py-3 px-4" href="{{route('about')}}">Explore More</a>
+                <a class="btn btn-primary py-3 px-4" href="{{route('about')}}">{{App::getLocale()=="en"?"Explore More":"थप अन्वेषण गर्नुहोस्"}}</a>
             </div>
             <div class="col-lg-3 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="row g-5">
                     <div class="col-12 col-sm-6 col-lg-12">
                         <div class="border-start ps-4">
                             <i class="fa fa-users fa-3x text-primary mb-3"></i>
-                            <h4 class="mb-3">Program Description</h4>
+                            <h4 class="mb-3">{{App::getLocale()=="en"?"Program Description":"कार्यक्रम विवरण"}}</h4>
                             <span>{{$data['about']->program_description[App::getLocale()]}}</span>
                         </div>
                     </div>
@@ -186,16 +218,16 @@
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-4 text-white">SAVE</h1>
+                <h1 class="display-4 text-white">{{App::getLocale()=="en"?"Save":"ऊर्जा"}}</h1>
             </div>
             <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s">
-                <h1 class="display-4" style="color: #81e81a;">ENERGY</h1>
+                <h1 class="display-4" style="color: #81e81a;">{{App::getLocale()=="en"?"Energy":"बचाउनुहोस्"}}</h1>
             </div>
             <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s">
-                <h1 class="display-4 text-white">SAVE</h1>
+                <h1 class="display-4 text-white">{{App::getLocale()=="en"?"Save":"पृथ्वी"}}</h1>
             </div>
             <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.7s">
-                <h1 class="display-4" style="color: #81e81a;">EARTH</h1>
+                <h1 class="display-4" style="color: #81e81a;">{{App::getLocale()=="en"?"Earth":"बचाउनुहोस्"}}</h1>
             </div>
         </div>
     </div>
@@ -208,8 +240,8 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                <h1 class="display-5 mb-4">Working Areas</h1>
-                <a class="btn btn-primary py-3 px-4" href="{{route('area')}}">Explore More</a>
+                <h1 class="display-5 mb-4">{{App::getLocale()=="en"?"Working Areas":"कार्य क्षेत्रहरू"}}</h1>
+                <a class="btn btn-primary py-3 px-4" href="{{route('area')}}">{{App::getLocale()=="en"?"Explore More":"थप अन्वेषण गर्नुहोस्"}}</a>
             </div>
             <div class="col-lg-6">
                 <div class="row g-4 align-items-center">
@@ -220,7 +252,7 @@
                                  <div class="col-12 wow fadeIn" data-wow-delay="0.3s">
                                      <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                          <div class="btn-square  rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                             <img class="" src="{{ asset('storage/images/'.$area->image) }}" alt="Area" height="50">
+                                             <img class="area_image" src="{{ asset('storage/images/'.$area->image) }}" alt="Area" height="50">
                                          </div>
                                          <h4 class="mb-0">{{$area->title}}</h4>
                                      </div>
@@ -234,7 +266,7 @@
                             <a href="{{route('area.show',$area->slug)}}">
                                 <div class="text-center rounded py-5 px-4" style="box-shadow: 0 0 45px rgba(0,0,0,.08);">
                                     <div class="btn-square  rounded-circle mx-auto mb-4" style="width: 90px; height: 90px;">
-                                        <img class="" src="{{ asset('storage/images/'.$area->image) }}" alt="Area" height="50">
+                                        <img class="area_image" src="{{ asset('storage/images/'.$area->image) }}" alt="Area" height="50">
 
                                     </div>
                                     <h4 class="mb-0">{{$area->title}}</h4>
@@ -307,7 +339,7 @@
                 <div style="position: relative; display: inline-block;" class="m-2">
                     <!-- Button trigger modal -->
                     <img src="{{ asset('storage/images/' . $item->gallery[0]->image) }}" alt="image" height="320"
-                         width="340" class="rounded">
+                         width="340" class="rounded gallery-image">
                     <button type="button" class="rounded-circle mx-2 centered-button" data-bs-toggle="modal"
                             data-bs-target="#exampleModal{{$item->id}}">
                         <i class="fa fa-eye"></i>
@@ -328,23 +360,17 @@
                             <div class="modal-body">
                                 <div id="carouselExampleControls{{$item->id}}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active" style="height: 400px; background-color: #000">
-                                            <div class="d-block w-100 p-4 text-center">
-                                                <h1 style="margin-top: 120px" class="text-white">
-                                                    {{$item->title}}
-                                                </h1>
-                                            </div>
-                                        </div>
-                                        @foreach($item->gallery as $pic)
-                                            <div class="carousel-item " style="height: 400px">
-                                                <img src="{{ asset('storage/images/' . $pic->image) }}" class="d-block w-100"
-                                                     alt="..." height="350px">
-                                                <div class="text-dark">
-                                                    <p class="text-dark">{{$pic->title}}</p>
-                                                </div>
-                                            </div>
 
-                                        @endforeach
+                                            @foreach ($item->gallery as $key=>$pic)
+                                                <div class="carousel-item {{$key == 0 ? 'active' : '' }}" data-bs-interval="2000" style="height: 400px">
+                                                    <img src="{{asset('storage/images/' . $pic->image)}}" class="d-block w-100"
+                                                         alt="..." height="350px">
+                                                        <p class="text-dark text-center">
+                                                            {{ $pic->title }}
+                                                        </p>
+                                                </div>
+                                            @endforeach
+
                                     </div>
                                     <button class="carousel-control-prev" type="button"
                                             data-bs-target="#carouselExampleControls{{$item->id}}" data-bs-slide="prev">
@@ -368,11 +394,11 @@
             @endif
         @endforeach
 
-        <div class="col-12 text-center">
-            <a href="images.html" class="btn btn-primary py-3 px-4" type="submit">See More</a>
-        </div>
     </div>
 
+</div>
+<div class="col-12 text-center">
+    <a href="{{route('gallery')}}" class="btn btn-primary py-3 px-4" type="submit">See More</a>
 </div>
 
 
@@ -419,12 +445,13 @@
         <div class="row g-5">
             @foreach($data['partners'] as $partner)
             <div class="col-lg-3 col-md-6 text-center">
-                <img src="{{asset('assets/img/gov.png')}}" alt="" srcset="" width="200">
+                <img src="{{ asset('storage/images/' . $partner->image) }}" alt="" srcset="" width="200" height="200">
                 <br>
                 <p class="text-primary font-weight-bold">{{$partner->title}}</p>
                 <p class="text-dark" >Src:<a class="text-primary" href="{{$partner->link}}">{{ $partner->link}}</a></p>
 
             </div>
+
             @endforeach
         </div>
     </div>
@@ -437,7 +464,7 @@
             <div class="col-lg-7">
                 <div class="bg-white rounded p-4 p-sm-5 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="display-5 text-center mb-5">Get in touch!</h1>
-                    <form action="{{route('backend.contact.store')}}" method="post">
+                    <form action="{{route('contact.store')}}" method="post">
                         @csrf
                     <div class="row g-3">
                         <div class="col-sm-6">
@@ -482,6 +509,13 @@
                                 <label for="message">Message</label>
                             </div>
                         </div>
+                            <div class="col-12 ">
+                                    <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                                    @if ($errors->has('g-recaptcha-response'))
+                                        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                                    @endif
+                            </div>
+
                         <div class="col-12 text-center">
                             <button class="btn btn-primary py-3 px-4" type="submit">Submit Now</button>
                         </div>
@@ -563,6 +597,7 @@
     // Call the showLocation function to display the specified location on the map
     showLocation();
 </script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
@@ -611,6 +646,33 @@
 <script>
     new bootnavbar();
 </script>
+
+<script>
+    $(document).ready(function() {
+        // Select the navbar toggler button
+        var navbarToggler = $('.navbar-toggler');
+
+        // Select the navbar collapse element
+        var navbarCollapse = $('#navbarSupportContent');
+
+        // Add an event listener for the navbar toggler button
+        navbarToggler.on('click', function() {
+            // Toggle the 'show' class on the navbar collapse element
+            navbarCollapse.toggleClass('show');
+        });
+    });
+</script>
+<script>
+    const langButtons = document.querySelectorAll('.lang-button');
+
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            langButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        });
+    });
+</script>
+
 <script type="text/javascript">
 
     var url = "{{ route('changeLang') }}";
@@ -622,6 +684,8 @@
 
 </script>
 <script src="https://unpkg.com/parallax-js@1.5.0/parallax.min.js"></script>
+
+
 
 
 

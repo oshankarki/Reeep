@@ -37,4 +37,13 @@ class AboutRequest extends FormRequest
         }
         return $rules;
     }
+    public function messages()
+    {
+        return [
+            'description.np.required' => 'The Description in Nepali field is required.',
+            'description.en.required' => 'The Description in English field is required.',
+            'program_description.np.required' => 'The Description in Nepali field is required.',
+            'program_description.en.required' => 'The Description in English field is required.',
+        ];
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\backend;
 
+use App\Rules\ReCaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
@@ -26,13 +27,17 @@ class ContactRequest extends FormRequest
             'email'=>'required',
             "phone" => 'required|numeric|regex:/^[0-9]{10}$/',
             'topic' => 'required',
+            'g-recaptcha-response' => ['required', new ReCaptcha]
         ];
+
         return $rules;
     }
     public function messages(): array
     {
         return [
-            'phone.regex' => 'Please enter a valid phone number.'
+            'phone.regex' => 'Please enter a valid phone number.',
+            'g-recaptcha-response.recaptcha' => 'Captcha verification failed',
+            'g-recaptcha-response.required' => 'Please complete the captcha'
         ];
     }
 }

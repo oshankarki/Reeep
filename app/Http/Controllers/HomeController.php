@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\backend\ContactRequest;
 use App\Models\Backend\Album;
 use App\Models\Backend\Area;
 use App\Models\Backend\Banner;
@@ -80,4 +81,5 @@ class HomeController extends Controller
         $user->save();
         return redirect()->route('admin.profile')->with('success', 'Password updated successfully');
     }
+
 }

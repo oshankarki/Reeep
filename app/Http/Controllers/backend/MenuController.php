@@ -144,4 +144,28 @@ class MenuController extends BackendBaseController
 
         }
     }
+    public function menu_order(Request $request)
+    {
+        $menu = $this->model::whereNull('parent_id')->where('type',1)->orderBy('order')->get();
+
+
+        return view('backend.menu.reorder_menu', compact('menu'));
+
+    }
+    public function menu_order_change(Request $request)
+    {
+        $data = $request->input('order');
+        foreach ($data as $index => $id) {
+            Menu::where('id', $id)->update(['order' => $index]);
+        }
+        return  response()->json([
+
+            'message' => 'Post Order changed successfully.',
+
+            'alert-type' => 'success'
+
+        ]);
+        //return response()->json(['success' => $data]);
+    }
+
 }
