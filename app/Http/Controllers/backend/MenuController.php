@@ -15,6 +15,10 @@ class MenuController extends BackendBaseController
     protected $module = 'Menu';
     public function __construct()
     {
+        $this->middleware('permission:menu-list|setting-create|menu-edit|menu-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:menu-create', ['only' => ['create','store']]);
+        $this->middleware('permission:menu-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:menu-delete', ['only' => ['destroy']]);
         $this->model= new Menu();
     }
     /**

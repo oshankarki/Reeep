@@ -17,14 +17,20 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
+
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
     Route::prefix('backend')->group(function () {
         Route::resource('menu', \App\Http\Controllers\backend\MenuController::class, ['names' => 'backend.menu']);
     });
+
     Route::prefix('backend')->group(function () {
-        Route::resource('roles', \App\Http\Controllers\backend\RoleController::class, ['names' => 'backend.rolesgit ']);
+        Route::resource('user', \App\Http\Controllers\backend\UserController::class, ['names' => 'backend.user']);
     });
+    Route::prefix('backend')->group(function () {
+        Route::resource('role', \App\Http\Controllers\backend\RoleController::class, ['names' => 'backend.role']);
+    });
+
     Route::get('/menu/order', [\App\Http\Controllers\backend\MenuController::class, 'menu_order'])->name('menu.menu_order');
     Route::post('/menu/menu_order_change', [\App\Http\Controllers\backend\MenuController::class, 'menu_order_change'])->name('menu.order_change');
     Route::prefix('backend')->group(function () {
