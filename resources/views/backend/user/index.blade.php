@@ -60,16 +60,18 @@
                             <td>
                                 @if(!empty($record->getRoleNames()))
                                     @foreach($record->getRoleNames() as $v)
-                                        <span class="badge rounded-pill bg-dark">{{ $v }}</span>
+                                        <span class="badge rounded-pill bg-g">{{ $v }}</span>
                                     @endforeach
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-info" href="{{ route('backend.user.show',$record->id) }}">Show</a>
-                                <a class="btn btn-primary" href="{{ route('backend.user.edit',$record->id) }}">Edit</a>
-                                {!! Form::open(['method' => 'DELETE','route' => ['backend.user.destroy', $record->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                {!! Form::close() !!}
+                                <a class="btn btn-primary" href="{{ route('backend.user.show',$record->id) }}"><i class="fa fa-eye"></i> </a>
+                                <a class="btn btn-warning" href="{{ route('backend.user.edit',$record->id) }}"><i class="fa fa-edit"></i></a>
+                                <form action="{{route('backend.user.destroy',$record->id)}}" method="post" style="display:inline-block">
+                                    @method("delete")
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash" aria-hidden="true"></i></button>
+                                </form>
                             </td>
                         </tr>
 

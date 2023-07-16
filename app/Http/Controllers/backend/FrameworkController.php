@@ -126,6 +126,7 @@ class FrameworkController extends BackendBaseController
                 $record->image = $imageName;
             }
 
+            $record->title = $request->input('title');
             $record->description = $request->input('description');
             $record->slug = $request->input('slug');
 

@@ -90,7 +90,7 @@ class PartnerController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Partner $request, string $id)
+    public function update(PartnerRequest $request, string $id)
     {
         try {
             $record = $this->model::find($id);
@@ -99,7 +99,7 @@ class PartnerController extends BackendBaseController
                 return redirect()->route('backend.partner.index');
             }
 
-            if($request->hasFile('image')) {
+            if ($request->hasFile('image')) {
                 // Delete previous image
                 $previousImagePath = public_path('images/' . $record->image);
                 if (file_exists($previousImagePath)) {
