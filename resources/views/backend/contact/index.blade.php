@@ -1,5 +1,5 @@
 @extends('layouts.app') @section('title',$module.'List') @section('content')
-    <!-- Content Header (Page header) -->
+
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -65,7 +65,7 @@
                     <tbody>
                     @foreach($data['records'] as $record)
                         <tr>
-                            <td>{{$loop->index+1}}</td>
+                            <td>{{$data['startNumber']++}}</td>
                             <td>{{$record->name}}</td>
                             <td>{{$record->email}}</td>
                             <td>{{$record->phone}}</td>
@@ -76,6 +76,11 @@
                     </tbody>
                 </table>
             </div>
+            <div class="d-flex justify-content-center">
+                {{ $data['records']->links('vendor.pagination.bootstrap-5') }}
+            </div>
+
+
             <!-- /.card-body -->
             <div class="card-footer">
                 Footer

@@ -54,3 +54,35 @@
     text-align: center;
     line-height: 30px;
 }
+
+.notification {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+}
+
+.notification-icon {
+    margin-right: 10px;
+}
+
+.notification-icon i {
+    color: #333;
+}
+
+.notification-content h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.notification-content p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+.badge {
+    margin-bottom: 5px;
+}

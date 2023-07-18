@@ -33,7 +33,8 @@ class PermissionTableSeeder extends Seeder
             'setting-list',
             'setting-create',
             'setting-edit',
-            'setting-delete'
+            'setting-delete',
+            'activity-logs'
         ];
 
         foreach ($permissions as $permission) {

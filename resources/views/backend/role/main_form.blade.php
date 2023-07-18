@@ -9,22 +9,30 @@
     <div class="form-group">
         {!! Form::label('permission', 'Permission') !!}
         <br>
-        @foreach ($permission as $value)
-            {{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
-            {{ $value->name }}
-            <br />
-        @endforeach
+        <div class="row">
+            @foreach ($permission as $value)
+                <div class="col-md-3">
+                    {{ Form::checkbox('permission[]', $value->id, false, ['class' => 'name']) }}
+                    {{ $value->name }}
+                    <br />
+                </div>
+            @endforeach
+        </div>
     </div>
 @else
     <div class="form-group">
-        <strong>Permission:</strong>
-        <br />
-        @foreach ($permission as $value)
-            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, ['class' => 'name']) }}
-            {{ $value->name }}
-            <br />
-        @endforeach
+        {!! Form::label('permission', 'Permission') !!}
+        <br>
+        <div class="row">
+            @foreach ($permission as $value)
+                <div class="col-md-3">
+                    {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, ['class' => 'name']) }}
+                    {{ $value->name }}
+                </div>
+            @endforeach
+        </div>
     </div>
+
 @endif
 <div class="card-footer">
     {!! Form::submit($button, ['class' => 'btn btn-success']) !!}

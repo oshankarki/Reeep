@@ -81,5 +81,11 @@ class HomeController extends Controller
         $user->save();
         return redirect()->route('admin.profile')->with('success', 'Password updated successfully');
     }
+    public function markAsRead(Request $request)
+    {
+        $request->user()->unreadNotifications->markAsRead();
+
+        return redirect()->back();
+    }
 
 }

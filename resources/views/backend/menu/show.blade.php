@@ -65,8 +65,8 @@
                                     <form id="toggle-form-{{$record->id}}" action="{{ route('menu.status', $record->id) }}" method="post">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="button" class="btn btn-success" onclick="toggleAppStatus({{$record->id}})">
-                                            {{$record->status? 'On' : 'OFF'}}
+                                        <button type="button" class="btn {{ $record->status == 0 ? 'btn-danger' : 'btn-success' }}" onclick="toggleAppStatus({{$record->id}})">
+                                            {{$record->status? 'ON' : 'OFF'}}
                                         </button>
                                     </form>
                                 </td>

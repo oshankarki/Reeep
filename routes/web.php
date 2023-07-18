@@ -17,12 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['register' => false]);
 
-
+Route::get('/mark-as-read', [App\Http\Controllers\HomeController::class, 'markAsRead'])->name('mark-as-read');
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
     Route::prefix('backend')->group(function () {
         Route::resource('menu', \App\Http\Controllers\backend\MenuController::class, ['names' => 'backend.menu']);
     });
+    Route::get('/backend/activity_logs', [\App\Http\Controllers\backend\ActivityLogsController::class, 'activityLogs'])->name('backend.activity_logs');
+
 
     Route::prefix('backend')->group(function () {
         Route::resource('user', \App\Http\Controllers\backend\UserController::class, ['names' => 'backend.user']);

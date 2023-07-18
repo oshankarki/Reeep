@@ -12,6 +12,8 @@ use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Pagination\Paginator;
+
 
 class ContactController extends BackendBaseController
 {
@@ -27,7 +29,9 @@ class ContactController extends BackendBaseController
      */
     public function index()
     {
-        $data['records'] = $this->model::get();
+        $perPage = 10; // Number of records per page
+        $data['records'] = $this->model::paginate($perPage)->withQueryString();
+        $data['startNumber'] = ($data['records']->currentPage() - 1) * $perPage + 1;
         return view($this->__loadDataToView($this->base_view.'index'), compact('data'));
     }
     public function exportContacts()

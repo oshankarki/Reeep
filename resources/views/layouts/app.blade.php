@@ -16,25 +16,31 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('assets/backend/plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
-
     <!-- Bootstrap 4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Include the jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     {{-- filepond --}}
     <script src="{{asset('assets/backend/plugins/select2/js/select2.full.min.js')}}"></script>
-
-
-
-    <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-    {{-- reorder --}}
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js" integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="{{ asset('assets/backend/dist/css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Initialize Bootstrap Dropdown -->
+<style>
+    .lang-button {
+        background: blue;
+        border: none;
+        color: white;
+    }
+
+    .lang-button.selected {
+        background: #000;
+    }
+</style>
 
     @yield('css')
 </head>
@@ -55,6 +61,26 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="far fa-bell"></i>
+                    <span class="badge badge-warning" style="font-size: .6rem; position: absolute; left: 15px;top: 9px;">{{ Auth::user()->unreadNotifications->count() }}</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header">{{ Auth::user()->unreadNotifications->count() }} Notifications</span>
+                    <div class="dropdown-divider"></div>
+
+                    @foreach (Auth::user()->unreadNotifications as $notification)
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> {{ $notification->data['message'] }}
+                            <span class="float-right text-muted text-sm">{{ $notification->created_at->diffForHumans() }}</span>
+                        </a>
+                    @endforeach
+                    <a href="{{ route('mark-as-read') }}" class="dropdown-item dropdown-footer">Mark as read</a>
+                </div>
+            </li>
+
             <li class="nav-item">
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
@@ -66,17 +92,26 @@
                     @csrf
                 </form>
             </li>
+            <li class="nav-item dropdown">
+                <form action="{{ route('changeLang') }}" method="get">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="btn-group">
+                                    <button type="submit" name="lang" value="en" class="btn btn-primary lang-button {{ session()->get('locale') == 'en' ? 'selected' : '' }}">
+                                        English
+                                    </button>
+                                    <button type="submit" name="lang" value="np" class="btn btn-dark lang-button {{ session()->get('locale') == 'np' ? 'selected' : '' }}">
+                                        नेपाली
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </li>
         </ul>
-        <form action="{{ route('changeLang') }}" method="get">
-            <div class="container">
-                <select class="changeLang text-dark" name="lang" style="background: none;border:none;">
-                    <option style="background: #2D8C59" value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                    <option style="background: #2D8C59" value="np" {{ session()->get('locale') == 'np' ? 'selected' : '' }}>
-                        नेपाली
-                    </option>
-                </select>
-            </div>
-        </form>
+
     </nav>
     <!-- /.navbar -->
 
@@ -358,7 +393,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-wrench"></i>
+                            <i class="nav-icon fas fa universal-access"></i>
                             <p>
                                 Role
                                 <i class="right fas fa-angle-left"></i>
@@ -382,7 +417,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-handshake"></i>
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
                                 Users
                                 <i class="right fas fa-angle-left"></i>
@@ -429,10 +464,18 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="{{route('backend.contact.index')}}" class="nav-link">
+                        <a href="{{url('backend/contact')}}" class="nav-link">
                             <i class="nav-icon fas fa-address-book"></i>
                             <p>
                                 Contact
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{url('/backend/activity_logs')}}" class="nav-link">
+                            <i class="nav-icon fas fa-history"></i>
+                            <p>
+                                Activity Logs
                             </p>
                         </a>
                     </li>
@@ -450,10 +493,7 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 3.1.0
-        </div>
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+        <strong>Copyright; <a href="https://www.youngminds.com.np/">Young Minds</a>.</strong> All rights reserved.
     </footer>
 
 
@@ -478,6 +518,16 @@
         Text = Text.toLowerCase();
         Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
         $("#slug").val(Text);
+    });
+</script>
+<script>
+    const langButtons = document.querySelectorAll('.lang-button');
+
+    langButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            langButtons.forEach(btn => btn.classList.remove('selected'));
+            button.classList.add('selected');
+        });
     });
 </script>
 <script>

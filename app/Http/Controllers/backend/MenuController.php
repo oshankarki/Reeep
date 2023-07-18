@@ -164,7 +164,7 @@ class MenuController extends BackendBaseController
         }
         return  response()->json([
 
-            'message' => 'Post Order changed successfully.',
+            'message' => 'Menu Reordered  successfully.',
 
             'alert-type' => 'success'
 

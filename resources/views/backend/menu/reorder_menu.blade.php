@@ -23,7 +23,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Drag and Drop to reorder the menu
+                <h3 class="card-title">Drag and Drop to Order Menu
                 </h3>
 
                 <div class="card-tools">
@@ -36,26 +36,26 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <ul id="post_sortable" class="post_list_ul">
-                                    @foreach ($menu as $menu)
-                                        <li class="ui-state-default" data-id="{{ $menu->id }}">
-                                            <span class="pos_num">{{ $loop->index + 1 }}</span>
-                                            <span>{{ $menu->title }}</span>
-                                        </li>
-                                        @endforeach
-                                        </li>
-                                </ul>
+                @include('backend.includes.flash')
+                    <div class="table-responsive">
+                        <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul id="post_sortable" class="post_list_ul">
+                                        @foreach ($menu as $menu)
+                                            <li class="ui-state-default" data-id="{{ $menu->id }}">
+                                                <span class="pos_num">{{ $loop->index + 1 }}</span>
+                                                <span>{{ $menu->title }}</span>
+                                            </li>
+                                            @endforeach
+                                            </li>
+                                    </ul>
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
             <!-- /.card-body -->
             <div class="card-footer">
                 Footer
@@ -65,6 +65,7 @@
         <!-- /.card -->
 
     </section>
+
 @endsection
 @section('js')
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
